@@ -1,0 +1,25 @@
+{
+  "name": "migmong",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "author": "Brad Reed 😎 <brad@bradreed.co.uk>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "27.0.3",
+    "esbuild": "0.14.5",
+    "esbuild-jest": "0.5.0",
+    "jest": "27.4.5",
+    "mongodb": "4.2.2",
+    "strip-ansi": "7.0.1",
+    "ts-jest": "27.1.1",
+    "typescript": "4.5.4"
+  },
+  "scripts": {
+    "build": "tsc -b .",
+    "test": "TEST=true jest integration",
+    "test:watch": "yarn run test --watch",
+    "watch": "yarn run build --watch"
+  },
+  "packageManager": "yarn@3.2.0-rc.8"
+}
