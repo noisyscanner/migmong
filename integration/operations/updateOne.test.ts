@@ -8,10 +8,15 @@ const mockLog = jest.fn();
 
 describe("updateOne", () => {
   let client: MongoClient;
+  let collection: Collection;
   let db: Db;
 
   beforeAll(async () => {
     ({ client, db } = await connect());
+  });
+
+  beforeEach(() => {
+    collection = db.collection("users");
   });
 
   afterEach(async () => {
@@ -25,10 +30,10 @@ describe("updateOne", () => {
   describe("dry run", () => {
     let users: User[];
     let userIds: Record<number, ObjectId>;
-    let collection: Collection;
+    let wrappedCollection: Collection;
 
     beforeEach(async () => {
-      collection = wrapCollection(db.collection("users"), {
+      wrappedCollection = wrapCollection(collection, {
         dry: true,
         logger: mockLog,
       });
@@ -44,7 +49,7 @@ describe("updateOne", () => {
     // TODO: Maybe pull these tests up into some executor
     it("should log out the operation in dry run mode", async () => {
       const updatedProps = { name: "New updateOne name" };
-      const result = await collection.updateOne({ id: { $in: users.map((u) => u.id) } }, { $set: updatedProps });
+      const result = await wrappedCollection.updateOne({ id: { $in: users.map((u) => u.id) } }, { $set: updatedProps });
       expect(result).toMatchInlineSnapshot(`
         Object {
           "acknowledged": true,
@@ -66,10 +71,10 @@ describe("updateOne", () => {
   describe("real run", () => {
     let users: User[];
     let userIds: Record<number, ObjectId>;
-    let collection: Collection;
+    let wrappedCollection: Collection;
 
     beforeEach(async () => {
-      collection = wrapCollection(db.collection("users"), {
+      wrappedCollection = wrapCollection(collection, {
         dry: false,
         logger: mockLog,
       });
@@ -84,7 +89,7 @@ describe("updateOne", () => {
 
     it("should run for real and not log", async () => {
       const updatedProps = { name: "New updateOne name" };
-      const result = await collection.updateOne({ id: { $in: users.map((u) => u.id) } }, { $set: updatedProps });
+      const result = await wrappedCollection.updateOne({ id: { $in: users.map((u) => u.id) } }, { $set: updatedProps });
       expect(result).toMatchInlineSnapshot(`
         Object {
           "acknowledged": true,

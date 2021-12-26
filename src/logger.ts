@@ -8,9 +8,15 @@ export function logOperation<TSchema extends Document = Document>(
   opName: string,
   docCount: number,
   filter: Filter<TSchema>,
-  update: UpdateFilter<TSchema>
+  update?: UpdateFilter<TSchema>
 ) {
-  logger(chalk.blue.italic(opName), `${chalk.bold(docCount)} documents matching\n`, filter, "\nwith\n", update);
+  const logArgs = [`${chalk.bold(docCount)} documents matching\n`, filter];
+
+  if (update) {
+    logArgs.push("\nwith\n", update);
+  }
+
+  logger(chalk.blue.italic(opName), ...logArgs);
 }
 
 const dryRunPrefix = chalk.yellow.bold("[DRY RUN]");

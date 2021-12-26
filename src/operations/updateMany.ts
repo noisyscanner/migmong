@@ -2,13 +2,13 @@ import { Collection, Document, Filter, UpdateFilter, UpdateOptions, UpdateResult
 import { WrappedCollection } from "../types";
 import { logOperation } from "../logger";
 
-export function wrapUpdateMany<TSchema extends Document = Document>(fn: Collection["updateOne"]) {
+export function wrapUpdateMany<TSchema extends Document = Document>(fn: Collection["updateMany"]) {
   return async function updateMany(
     this: WrappedCollection<TSchema>,
     filter: Filter<TSchema>,
     update: UpdateFilter<TSchema> | Partial<TSchema>,
     options: UpdateOptions
-  ): Promise<UpdateResult> {
+  ): Promise<Document | UpdateResult> {
     const count = await this.countDocuments(filter);
 
     const dry = this.__migmong_options.dry;
