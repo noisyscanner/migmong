@@ -7,19 +7,33 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "27.0.3",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "5.8.1",
+    "@typescript-eslint/parser": "5.8.1",
     "esbuild": "0.14.5",
     "esbuild-jest": "0.5.0",
+    "eslint": "8.6.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.4",
     "jest": "27.4.5",
-    "mongodb": "4.2.2",
+    "mongodb": "^4.2.2",
+    "prettier": "^2.5.1",
     "strip-ansi": "7.0.1",
     "ts-jest": "27.1.1",
     "typescript": "4.5.4"
   },
   "scripts": {
     "build": "tsc -b .",
+    "lint": "eslint",
     "test": "TEST=true jest integration",
     "test:watch": "yarn run test --watch",
     "watch": "yarn run build --watch"
   },
-  "packageManager": "yarn@3.2.0-rc.8"
+  "packageManager": "yarn@3.2.0-rc.8",
+  "dependencies": {
+    "chalk": "^5.0.0"
+  }
 }
