@@ -22,6 +22,7 @@ const wrappers = {
 
 export function wrapCollection<TSchema extends Document = Document>(
   collection: Collection<TSchema>,
+  // eslint-disable-next-line no-console
   { dry = isDry(), logger: loggerImpl = console.log }: WrapCollectionOptions = {}
 ) {
   const logger = getLogger(dry, loggerImpl);

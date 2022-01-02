@@ -10,7 +10,7 @@ export function wrapDeleteMany<TSchema extends Document = Document>(fn: Collecti
   ): Promise<DeleteResult> {
     const count = await this.countDocuments(filter);
 
-    const dry = this.__migmong_options.dry;
+    const { dry } = this.__migmong_options;
     logOperation(this.__migmong_log, "deleteMany", count, filter);
 
     if (dry) {
@@ -21,6 +21,6 @@ export function wrapDeleteMany<TSchema extends Document = Document>(fn: Collecti
       };
     }
 
-    return await fn(filter, options);
+    return fn(filter, options);
   };
 }

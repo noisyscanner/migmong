@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { UpdateFilter, Document, Filter } from "mongodb";
 
-export type Logger = (...args: unknown[]) => void;
+export type Logger = (..._args: unknown[]) => void;
 
 export function logOperation<TSchema extends Document = Document>(
   logger: Logger,
@@ -21,6 +21,7 @@ export function logOperation<TSchema extends Document = Document>(
 
 const dryRunPrefix = chalk.yellow.bold("[DRY RUN]");
 
+// eslint-disable-next-line no-console
 export function getLogger(isDry: boolean, loggerImpl: Logger = console.log) {
   if (!isDry) {
     return loggerImpl;

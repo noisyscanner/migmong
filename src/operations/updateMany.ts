@@ -11,7 +11,7 @@ export function wrapUpdateMany<TSchema extends Document = Document>(fn: Collecti
   ): Promise<Document | UpdateResult> {
     const count = await this.countDocuments(filter);
 
-    const dry = this.__migmong_options.dry;
+    const { dry } = this.__migmong_options;
     logOperation(this.__migmong_log, "updateMany", count, filter, update);
 
     if (dry) {
@@ -25,6 +25,6 @@ export function wrapUpdateMany<TSchema extends Document = Document>(fn: Collecti
       };
     }
 
-    return await fn(filter, update, options);
+    return fn(filter, update, options);
   };
 }

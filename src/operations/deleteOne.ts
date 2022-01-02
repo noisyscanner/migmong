@@ -10,7 +10,7 @@ export function wrapDeleteOne<TSchema extends Document = Document>(fn: Collectio
   ): Promise<DeleteResult> {
     const count = await this.countDocuments(filter);
 
-    const dry = this.__migmong_options.dry;
+    const { dry } = this.__migmong_options;
     logOperation(this.__migmong_log, "deleteOne", count, filter);
 
     if (dry) {
@@ -21,6 +21,6 @@ export function wrapDeleteOne<TSchema extends Document = Document>(fn: Collectio
       };
     }
 
-    return await fn(filter, options);
+    return fn(filter, options);
   };
 }

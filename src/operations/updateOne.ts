@@ -13,7 +13,7 @@ export function wrapUpdateOne<TSchema extends Document = Document>(fn: Collectio
 
     logOperation(this.__migmong_log, "updateOne", count, filter, update);
 
-    const dry = this.__migmong_options.dry;
+    const { dry } = this.__migmong_options;
 
     if (dry) {
       // return what the mongo driver would in real life
@@ -26,6 +26,6 @@ export function wrapUpdateOne<TSchema extends Document = Document>(fn: Collectio
       };
     }
 
-    return await fn(filter, update, options);
+    return fn(filter, update, options);
   };
 }
