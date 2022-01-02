@@ -5,6 +5,7 @@ import { WrapCollectionOptions, WrappedCollection } from "./types";
 import { getLogger } from "./logger";
 import { isDry } from "./utils";
 import { wrapDeleteMany } from "./operations/deleteMany";
+import { wrapDeleteOne } from "./operations/deleteOne";
 
 /**
  * TODO:
@@ -16,6 +17,7 @@ const wrappers = {
   updateOne: wrapUpdateOne,
   updateMany: wrapUpdateMany,
   deleteMany: wrapDeleteMany,
+  deleteOne: wrapDeleteOne,
 };
 
 export function wrapCollection<TSchema extends Document = Document>(
