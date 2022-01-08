@@ -7,8 +7,5 @@
     "declaration": true,
     "types": ["jest"],
     "esModuleInterop": true
-  },
-  "include": [
-    "src/**/*"
-  ]
+  }
 }
