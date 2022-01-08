@@ -30,6 +30,13 @@ jobs:
 
     - run: yarn
 
+    - uses: sibiraj-s/action-eslint@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        eslint-args: '--ignore-path=.gitignore --quiet'
+        extensions: 'js,ts'
+        annotations: true
+
     - run: yarn run build
 
     - run: yarn run test
