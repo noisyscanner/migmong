@@ -5,6 +5,12 @@
   "main": "dist/index.js",
   "author": "Brad Reed 😎 <brad@bradreed.co.uk>",
   "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  },
+  "peerDependencies": {
+    "mongodb": "~4.2.2"
+  },
   "devDependencies": {
     "@types/jest": "27.0.3",
     "@types/node": "^16.11.12",
@@ -19,24 +25,19 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^25.3.4",
     "jest": "27.4.5",
-    "mongodb": "^4.2.2",
+    "mongodb": "~4.2.2",
     "prettier": "^2.5.1",
     "strip-ansi": "7.0.1",
     "ts-jest": "27.1.1",
     "typescript": "4.5.4"
   },
-  "peerDependencies": {
-    "mongodb": "^4.2.2"
-  },
   "scripts": {
     "build": "tsc -b .",
-    "lint": "eslint",
+    "lint": "eslint --ext js,ts src",
+    "lint:report": "yarn run lint --output-file eslint_report.json --format json",
     "test": "TEST=true jest integration",
     "test:watch": "yarn run test --watch",
     "watch": "yarn run build --watch"
   },
-  "packageManager": "yarn@3.2.0-rc.8",
-  "dependencies": {
-    "chalk": "^5.0.0"
-  }
+  "packageManager": "yarn@3.2.0-rc.8"
 }
