@@ -3,8 +3,6 @@ import { UpdateFilter, Document, Filter } from "mongodb";
 
 export type Logger = (..._args: unknown[]) => void;
 
-const thing = 1;
-
 export function logOperation<TSchema extends Document = Document>(
   logger: Logger,
   opName: string,
