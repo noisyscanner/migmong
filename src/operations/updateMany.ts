@@ -1,6 +1,6 @@
 import { Collection, Document, Filter, UpdateFilter, UpdateOptions, UpdateResult } from "mongodb";
 import { WrappedCollection } from "../types";
-import { logOperation } from "../logger";
+import { logUpdateOperation } from "../logger";
 
 export function wrapUpdateMany<TSchema extends Document = Document>(fn: Collection["updateMany"]) {
   return async function updateMany(
@@ -12,7 +12,7 @@ export function wrapUpdateMany<TSchema extends Document = Document>(fn: Collecti
     const count = await this.countDocuments(filter);
 
     const { dry } = this.__migmong_options;
-    logOperation(this.__migmong_log, "updateMany", count, filter, update);
+    logUpdateOperation(this.__migmong_log, "updateMany", count, filter, update);
 
     if (dry) {
       // return what the mongo driver would in real life

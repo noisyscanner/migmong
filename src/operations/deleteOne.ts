@@ -1,6 +1,6 @@
 import { Collection, Document, Filter, DeleteOptions, DeleteResult } from "mongodb";
 import { WrappedCollection } from "../types";
-import { logOperation } from "../logger";
+import { logUpdateOperation } from "../logger";
 
 export function wrapDeleteOne<TSchema extends Document = Document>(fn: Collection["deleteOne"]) {
   return async function deleteOne(
@@ -11,7 +11,7 @@ export function wrapDeleteOne<TSchema extends Document = Document>(fn: Collectio
     const count = await this.countDocuments(filter);
 
     const { dry } = this.__migmong_options;
-    logOperation(this.__migmong_log, "deleteOne", count, filter);
+    logUpdateOperation(this.__migmong_log, "deleteOne", count, filter);
 
     if (dry) {
       // return what the mongo driver would in real life

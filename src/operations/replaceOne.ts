@@ -1,6 +1,6 @@
 import { Collection, Document, Filter, ReplaceOptions, UpdateResult } from "mongodb";
 import { WrappedCollection } from "../types";
-import { logOperation } from "../logger";
+import { logUpdateOperation } from "../logger";
 
 export function wrapReplaceOne<TSchema extends Document = Document>(fn: Collection["replaceOne"]) {
   return async function replaceOne(
@@ -11,7 +11,7 @@ export function wrapReplaceOne<TSchema extends Document = Document>(fn: Collecti
     const count = await this.countDocuments(filter);
 
     const { dry } = this.__migmong_options;
-    logOperation(this.__migmong_log, "replaceOne", count, filter);
+    logUpdateOperation(this.__migmong_log, "replaceOne", count, filter);
 
     if (dry) {
       // return what the mongo driver would in real life

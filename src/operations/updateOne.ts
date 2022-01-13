@@ -1,6 +1,6 @@
 import { Collection, Document, Filter, UpdateFilter, UpdateOptions, UpdateResult } from "mongodb";
 import { WrappedCollection } from "../types";
-import { logOperation } from "../logger";
+import { logUpdateOperation } from "../logger";
 
 export function wrapUpdateOne<TSchema extends Document = Document>(fn: Collection["updateOne"]) {
   return async function updateOne(
@@ -11,7 +11,7 @@ export function wrapUpdateOne<TSchema extends Document = Document>(fn: Collectio
   ): Promise<UpdateResult> {
     const count = await this.countDocuments(filter);
 
-    logOperation(this.__migmong_log, "updateOne", count, filter, update);
+    logUpdateOperation(this.__migmong_log, "updateOne", count, filter, update);
 
     const { dry } = this.__migmong_options;
 
