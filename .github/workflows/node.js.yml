@@ -39,6 +39,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         coverage-file: ./coverage/coverage-final.json
+        skip-step: all
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
