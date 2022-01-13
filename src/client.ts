@@ -8,6 +8,8 @@ import { wrapDeleteMany } from "./operations/deleteMany";
 import { wrapDeleteOne } from "./operations/deleteOne";
 import { wrapInsertOne } from "./operations/insertOne";
 import { wrapInsertMany } from "./operations/insertMany";
+import { wrapRename } from "./operations/rename";
+import { wrapDrop } from "./operations/drop";
 
 /**
  * TODO:
@@ -22,6 +24,8 @@ const wrappers = {
   deleteOne: wrapDeleteOne,
   insertOne: wrapInsertOne,
   insertMany: wrapInsertMany,
+  rename: wrapRename,
+  drop: wrapDrop,
 };
 
 export function wrapCollection<TSchema extends Document = Document>(

@@ -1,7 +1,7 @@
 import stripAnsi from "strip-ansi";
 import { WrappedCollection } from "../src/types";
 
-export function mockCollection(isDry: boolean, mockedDocumentCount: number) {
+export function mockCollection(isDry: boolean, mockedDocumentCount: number = 0) {
   return {
     __migmong_options: {
       dry: isDry,
