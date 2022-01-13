@@ -1,7 +1,6 @@
 import path from "path";
 import { promises as fs } from "fs";
 import { Db, MongoClient } from "mongodb";
-import { connect } from "./utils";
 import { MigrationDoc, MigrationModule } from "./types";
 
 const config = {
@@ -56,12 +55,16 @@ async function runMigrations(db: Db, client: MongoClient, migrationFiles: string
   }
 }
 
-// TODO: Instead of connecting in here, maybe instantiate some migration class that has a connection and can do it
-// so that in tests we can connect, and then tear down the connection after
-export async function up() {
-  const { db, client } = await connect();
-  const migrationsToRun = await getMigrationFilesToRun(db);
-  await runMigrations(db, client, migrationsToRun);
+// TODO: Accept config object instead of db
+//       Use config to decide whether to run in dry mode or not
+export class Runner {
+  // eslint-disable-next-line no-useless-constructor,no-empty-function
+  constructor(private db: Db, private client: MongoClient) {}
+
+  async up() {
+    const migrationsToRun = await getMigrationFilesToRun(this.db);
+    await runMigrations(this.db, this.client, migrationsToRun);
+  }
 }
 
 // TESTS

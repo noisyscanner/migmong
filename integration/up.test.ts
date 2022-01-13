@@ -2,7 +2,7 @@ import { Collection, Db, MongoClient, ObjectId } from "mongodb";
 import { promises as fs } from "fs";
 import path from "path";
 import { connect } from "./helper";
-import { up } from "../src/runner";
+import { Runner } from "../src/runner";
 import { MigrationDoc } from "../src/types";
 
 const FIXTURES_DIR = path.join(__dirname, "__fixtures__");
@@ -26,9 +26,11 @@ describe("up", () => {
   let musiciansCollection: Collection;
   let migrationsCollection: Collection<MigrationDoc>;
   let db: Db;
+  let runner: Runner;
 
   beforeAll(async () => {
     ({ client, db } = await connect());
+    runner = new Runner(db, client);
   });
 
   beforeEach(() => {
@@ -52,7 +54,7 @@ describe("up", () => {
       const musicianFixtures = await getMusicianFixtures();
       await musiciansCollection.insertMany(musicianFixtures);
 
-      await up();
+      await runner.up();
 
       // Ensure that the migrations were actually ran
 
