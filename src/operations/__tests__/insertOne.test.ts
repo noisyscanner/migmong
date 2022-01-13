@@ -1,6 +1,6 @@
+import { ObjectId } from "mongodb";
 import { wrapInsertOne } from "../insertOne";
 import { mockCollection, stripLogLines } from "../../../test/test-utils";
-import { ObjectId } from "mongodb";
 
 const mockInsertOne = jest.fn();
 const mockedDocumentCount = 100;
