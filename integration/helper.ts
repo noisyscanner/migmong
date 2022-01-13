@@ -4,7 +4,6 @@ const config = {
   // host: "127.0.0.1",
   host: "BRAD-PC",
   port: 27017,
-  db: "migmong-test",
 };
 
 export async function connect() {
@@ -22,7 +21,5 @@ export async function connect() {
     await client.close();
   }
 
-  const db = client.db(config.db);
-
-  return { client, db };
+  return client;
 }

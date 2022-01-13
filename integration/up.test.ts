@@ -6,6 +6,8 @@ import { Runner } from "../src/runner";
 import { MigrationDoc } from "../src/types";
 
 const FIXTURES_DIR = path.join(__dirname, "__fixtures__");
+const dbName = "migmong-test";
+const config = { mongo: { db: dbName }, migrationsCollection: "migrations" };
 
 async function getMusicianFixtures() {
   const musicianFixturesDir = path.join(FIXTURES_DIR, "musicians");
@@ -23,19 +25,20 @@ async function getMusicianFixtures() {
 
 describe("up", () => {
   let client: MongoClient;
+  let db: Db;
   let musiciansCollection: Collection;
   let migrationsCollection: Collection<MigrationDoc>;
-  let db: Db;
   let runner: Runner;
 
   beforeAll(async () => {
-    ({ client, db } = await connect());
-    runner = new Runner(db, client);
+    client = await connect();
+    runner = new Runner(client, config);
+    db = client.db(dbName);
   });
 
   beforeEach(() => {
     musiciansCollection = db.collection("musicians");
-    migrationsCollection = db.collection("migrations");
+    migrationsCollection = db.collection(config.migrationsCollection);
   });
 
   afterEach(async () => {
@@ -63,7 +66,6 @@ describe("up", () => {
       expect(await musiciansCollection.countDocuments({ genres: "Ska" })).toBe(0);
 
       // Ensure migration was recorded in migrations collection
-      // TODO: Use config object
       const migrationEntry = await migrationsCollection.findOne({});
       expect(migrationEntry).toEqual({
         _id: expect.any(ObjectId),
