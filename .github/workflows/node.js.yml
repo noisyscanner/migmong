@@ -38,7 +38,7 @@ jobs:
       uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        coverage-file: ./coverage/report.json
+        coverage-file: ./coverage/coverage-final.json
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
