@@ -32,14 +32,12 @@ jobs:
 
     - run: yarn run build
 
-    - run: yarn run test:coverage
-
-    - name: Jest coverage report
+    - name: Test and upload coverage
       uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        coverage-file: ./coverage/coverage-final.json
-        skip-step: all
+        test-script: yarn run test:coverage
+        package-manager: yarn
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
