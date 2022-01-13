@@ -8,5 +8,5 @@ export default {
     "^.+\\.(t|j)s$": "esbuild-jest",
   },
   transformIgnorePatterns: [`node_modules/(?!${esModules})`],
-  testPathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/integration/", "<rootDir>/test"],
+  testPathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/test"],
 };
