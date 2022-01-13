@@ -32,7 +32,10 @@ jobs:
 
     - run: yarn run build
 
-    - run: yarn run test
+    - run: yarn run test --coverage
+
+    - name: Code Coverage Report
+      uses: romeovs/lcov-reporter-action@v0.2.11
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
