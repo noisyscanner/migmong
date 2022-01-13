@@ -26,7 +26,7 @@ module.exports = {
     "no-underscore-dangle": [
       2,
       {
-        allow: ["__migmong_log", "__migmong_options"],
+        allow: ["__migmong_log", "__migmong_options", "_id"],
       },
     ],
     "@typescript-eslint/no-unused-vars": [

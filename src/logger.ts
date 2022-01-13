@@ -3,7 +3,11 @@ import { UpdateFilter, Document, Filter } from "mongodb";
 
 export type Logger = (..._args: unknown[]) => void;
 
-export function logOperation<TSchema extends Document = Document>(
+export function logOperation(logger: Logger, opName: string, ...logArgs: unknown[]) {
+  logger(chalk.blue.italic(opName), ...logArgs);
+}
+
+export function logUpdateOperation<TSchema extends Document = Document>(
   logger: Logger,
   opName: string,
   docCount: number,
@@ -16,7 +20,7 @@ export function logOperation<TSchema extends Document = Document>(
     logArgs.push("\nwith\n", update);
   }
 
-  logger(chalk.blue.italic(opName), ...logArgs);
+  logOperation(logger, opName, ...logArgs);
 }
 
 const dryRunPrefix = chalk.yellow.bold("[DRY RUN]");
