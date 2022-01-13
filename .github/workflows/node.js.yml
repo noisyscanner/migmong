@@ -38,6 +38,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         test-script: yarn run test:coverage
         package-manager: yarn
+        annotations: none
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
