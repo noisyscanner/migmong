@@ -34,11 +34,11 @@ jobs:
 
     - run: yarn run test --coverage
 
-    - name: Code Coverage Report
-      uses: romeovs/lcov-reporter-action@v0.2.11
+    - name: Jest coverage report
+      uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
       with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-        delete-old-comments: "true"
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        coverage-file: ./coverage/report.json
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report

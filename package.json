@@ -36,6 +36,7 @@
     "lint": "eslint --ext js,ts src",
     "lint:report": "yarn run lint --output-file eslint_report.json --format json",
     "test": "TEST=true jest integration",
+    "test:coverage": "yarn run test --coverage --coverageReporters=\"text\" --coverageReporters=\"text-summary\"",
     "test:watch": "yarn run test --watch",
     "watch": "yarn run build --watch"
   },
