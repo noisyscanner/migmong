@@ -36,6 +36,8 @@ jobs:
 
     - name: Code Coverage Report
       uses: romeovs/lcov-reporter-action@v0.2.11
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
