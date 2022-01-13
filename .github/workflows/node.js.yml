@@ -38,6 +38,7 @@ jobs:
       uses: romeovs/lcov-reporter-action@v0.2.11
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
+        delete-old-comments: true
 
     - name: Save Code Linting Report JSON
       run: npm run lint:report
