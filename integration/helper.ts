@@ -1,7 +1,8 @@
 import { MongoClient } from "mongodb";
 
 const config = {
-  host: "127.0.0.1",
+  // host: "127.0.0.1",
+  host: "BRAD-PC",
   port: 27017,
   db: "migmong-test",
 };
